@@ -6,14 +6,18 @@ production image.
 
 ## Local development
 
-Install Docker with Compose, then run:
+Install Docker with Compose and [just](https://just.systems/). On macOS, install
+just with `brew install just`. Run these commands from the project directory:
 
 ```sh
-docker compose build
-docker compose run --rm web python manage.py migrate
-docker compose run --rm web python manage.py createsuperuser
-docker compose up
+just setup
+just superuser
 ```
+
+`just setup` builds the image, starts PostgreSQL, applies migrations, and starts
+the web server in the background. On subsequent visits, use `just up`.
+Run `just` or `just --list` to see the documented shortcuts. Commands also work
+from project subdirectories.
 
 Open http://localhost:8000 and http://localhost:8000/admin/. Python edits trigger
 Django's automatic reload. Templates and static files are read from the mounted
@@ -30,32 +34,46 @@ The container uses its own Linux environment at `/opt/venv`; the Mac's `.venv`
 is not used. The development target includes uv and any development dependency
 groups. It does not run `collectstatic` or migrations at startup.
 
-Stop with Ctrl+C, or remove the stopped containers with `docker compose down`.
-The database volume survives `down`. Adding `--volumes` deletes the database.
+Stop and remove containers with `just down`; the database volume survives.
+Using Docker's `down --volumes` deletes the database.
 
 ### Common commands
 
 ```sh
-# Use exec while the web container is running.
-docker compose exec web python manage.py makemigrations
-docker compose exec web python manage.py migrate
-docker compose exec web python manage.py check
-docker compose exec web python manage.py test
+just up                         # Start in the background
+just down                       # Stop, keeping database data
+just status                     # Show container status
+just logs                       # Follow application logs (Ctrl+C to stop following)
+just logs db                    # Follow PostgreSQL logs
+just rebuild                    # Rebuild and restart after Dockerfile changes
 
-# Open PostgreSQL's interactive SQL client.
-docker compose exec db psql -U wagtail -d wagtail
+just manage makemigrations
+just migrate
+just check
+just test
+just test home --keepdb
+just manage shell
+just manage shell -c 'print("hello from Django")'
+just dbshell
 
-# Add a dependency and update pyproject.toml and uv.lock on your host.
-docker compose run --rm web uv add package-name
-docker compose run --rm web uv add --dev package-name
+# Add dependencies, update pyproject.toml and uv.lock, then rebuild and restart.
+just add django-debug-toolbar
+just add --dev ruff
 
-# Rebuild after dependency or Dockerfile changes.
-docker compose up --build
+# Run Django commands without an already-running web container.
+just manage-once check
 ```
+
+`manage`, `migrate`, `superuser`, `check`, and `test` use the running web container.
+`manage-once` starts a temporary container and the database if needed. Arguments,
+including quoted Python code, are forwarded as supplied. The shortcuts explicitly
+select the development Compose file; production shortcuts begin with `prod-`.
+The underlying Docker Compose commands remain available if you need them.
 
 Alternatively, host-installed uv can update dependencies with `uv add`.
 Commit both `pyproject.toml` and `uv.lock`. Image builds use `uv sync --locked`,
-so an out-of-date lockfile fails the build.
+so an out-of-date lockfile fails the build. Run `just rebuild` after changing
+dependencies with host-installed uv.
 
 ## Production Docker
 
@@ -97,11 +115,15 @@ cp .env.production.example .env.production
 # hostnames in .env.production. No development database is needed for this.
 docker compose run --rm --no-deps web python -c "import secrets; print(secrets.token_urlsafe(64)); print(secrets.token_urlsafe(32))"
 
-docker compose --env-file .env.production -f compose.production.yaml build
-docker compose --env-file .env.production -f compose.production.yaml run --rm web python manage.py migrate
-docker compose --env-file .env.production -f compose.production.yaml run --rm web python manage.py createsuperuser
-docker compose --env-file .env.production -f compose.production.yaml up -d
+just prod-build
+just prod-migrate
+just prod-manage createsuperuser
+just prod-up
 ```
+
+Production shortcuts select `compose.production.yaml` and pass
+`--env-file .env.production`. Use `just prod-logs` to follow application logs.
+They operate on the Docker host selected by your current Docker context.
 
 Keep secrets inside single quotes in `.env.production`, as in the example, so
 Compose does not interpret dollar signs. Passing `--env-file` supplies the
