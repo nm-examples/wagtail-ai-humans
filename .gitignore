@@ -1,0 +1,28 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Local application data and settings
+*.sqlite3
+*.sqlite3-*
+/media/
+/static/
+/config/settings/local.py
+.env
+.env.*
+!.env*.example
+
+# Editor and operating-system files
+.DS_Store
+.idea/
+.vscode/
+*.swp
