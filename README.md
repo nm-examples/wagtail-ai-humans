@@ -9,6 +9,21 @@ This repository also includes the local
 own templates for creating another site. Invoke it here with
 `$wagtail-bootstrap` and supply the new project directory and site name.
 
+## Project folders
+
+Work on this project spans two sibling repositories:
+
+- `wagtail-ai-humans/`: the Wagtail application and its local bootstrap skill.
+- `../wagtail-ai-humans-base/`: the captured, reusable copy of that skill.
+
+When updating `.agents/skills/wagtail-bootstrap/`, copy the complete update to
+the matching directory in `wagtail-ai-humans-base`, including templates,
+references, UI metadata, and resource additions or removals. Preserve unrelated
+application changes and independent edits in either repository.
+
+For now, neither repository has an `AGENTS.md`; separate agent instruction files
+will be introduced for each codebase when needed.
+
 ## Local development
 
 Install Docker with Compose and [just](https://just.systems/). On macOS, install
