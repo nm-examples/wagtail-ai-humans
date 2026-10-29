@@ -4,6 +4,11 @@ Wagtail CMS with Python 3.14, PostgreSQL 18, and dependencies managed by uv. Doc
 the main local development workflow. Docker's default build target is a separate
 production image.
 
+This repository also includes the local
+[`wagtail-bootstrap` skill](.agents/skills/wagtail-bootstrap/SKILL.md), with its
+own templates for creating another site. Invoke it here with
+`$wagtail-bootstrap` and supply the new project directory and site name.
+
 ## Local development
 
 Install Docker with Compose and [just](https://just.systems/). On macOS, install

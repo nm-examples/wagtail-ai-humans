@@ -1,0 +1,3 @@
+interface:
+  display_name: "Wagtail Bootstrap"
+  short_description: "Create Wagtail sites with uv, Docker and PostgreSQL"
