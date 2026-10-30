@@ -95,3 +95,43 @@ problem, resulting behaviour, significant decisions, checks and results, and any
 remaining limitations. Include practical steps to try the feature when useful.
 Keep the handoff understandable without the chat history, and distinguish
 completed work from proposed follow-up increments.
+
+## Git workflow
+
+Apply these requirements unless the user gives different Git instructions. They
+guide commit decisions; they do not imply hooks, CI, a branch policy, or numerical
+commit-size limits are configured.
+
+1. **Define commit boundaries before substantial work.** Describe the intended
+   commits briefly as part of the scope assessment. Each commit should explain
+   one coherent change, including its relevant tests, migrations, and documentation.
+   A small correction can be a single commit without a separate written plan.
+2. **Commit each completed, verified increment.** Make local commits by default,
+   rather than accumulating finished features or waiting for another commit
+   request. Verification is proportional to the change, as described above.
+   Do not commit unfinished work or a change with unresolved relevant failures;
+   explain any verification gap and leave the affected work uncommitted when the
+   gap prevents establishing that the increment is ready. Keep working on later
+   authorised increments after committing earlier ones. If the user asks to leave
+   changes uncommitted or review them first, honour that instruction.
+3. **Review the staged diff before every commit.** Inspect Git status first and
+   distinguish existing user changes from this task's changes. Stage only the
+   intended files or hunks, inspect the complete staged diff, and run
+   `git diff --cached --check`. Check for accidental files, unrelated edits, secrets,
+   and the reported verification results. Do not include someone else's staged
+   changes; ask when overlapping changes cannot be separated safely. Use a message
+   describing the concrete purpose of the change.
+4. **Reassess oversized changes.** Use changed-file and line counts as signals to
+   inspect scope, not hard thresholds. Split independent behaviours and unrelated
+   refactoring. Keep inseparable changes together and explain an unusually broad
+   commit when its coherence is not obvious. Do not split simply to meet a count.
+5. **Report commits and remaining work.** Verify Git status after committing and
+   report each repository's commit IDs, completed outcomes, and remaining work or
+   uncommitted changes. Distinguish pre-existing user changes from unfinished work.
+
+Keep commits local unless pushing or merging is explicitly requested. Do not
+rewrite existing commits or change repository configuration to satisfy this
+workflow. If the destination is not its own Git repository, report that no commit
+was made rather than committing into an enclosing repository. For mirrored skill
+changes, verify the copies match and commit the corresponding increment in each
+repository; report any partial completion if one repository cannot be committed.

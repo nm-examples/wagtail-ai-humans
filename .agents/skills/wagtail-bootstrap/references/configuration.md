@@ -58,7 +58,8 @@ placeholder values must not become runtime environment defaults.
 - The Justfile keeps local commands on `compose.yaml`, and `prod-` commands use
   the production file and `.env.production`. Keep positional argument forwarding.
 - Secret files, local settings, uploaded data, and caches stay out of Git and
-  Docker build contexts. Commit the generated lockfile when a commit is requested.
+  Docker build contexts. Include the generated lockfile in the verified bootstrap
+  commit, following the development skill's Git workflow and the user's instructions.
 
 ## Validate the generated project
 

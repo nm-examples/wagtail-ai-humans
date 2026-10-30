@@ -74,5 +74,12 @@ validation that could not run, such as Docker checks without an available daemon
 
 Leave production credentials unset and explain that HTTPS, upload delivery,
 email, and backups are completed for the chosen host. Production support here
-does not authorize deployment. Do not commit or push automatically; follow the
-user's Git instructions. Keep existing data and unrelated services intact.
+does not authorize deployment. Follow the bundled
+[development skill's Git workflow](assets/templates/.agents/skills/wagtail-development/SKILL.md#git-workflow):
+treat the validated bootstrap as one coherent increment and commit it locally
+when the destination is its own Git repository, unless the user requests otherwise.
+Review the staged diff and include the generated lockfile and project guidance.
+If the destination is not its own Git repository, report that no commit was made;
+do not commit into an enclosing source repository. Report the commit ID and any
+remaining work. Pushing and merging require explicit requests. Keep existing data
+and unrelated services intact.

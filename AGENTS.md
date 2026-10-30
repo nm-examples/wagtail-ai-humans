@@ -8,6 +8,10 @@ Keep these requirements in effect even when another skill provides technical hel
   should be split and propose usable increments before broad implementation.
 - Establish expected behaviour and meaningful verification before coding.
 - Keep changes focused and preserve unrelated work.
+- Follow the development skill's Git workflow: define coherent commit boundaries,
+  commit verified increments by default, review the staged diff, reassess oversized
+  changes, and report commit IDs and remaining work. Honour user Git instructions;
+  pushing and merging require explicit requests.
 - Never weaken tests, checks, or workflow requirements just to make an
   implementation pass. Explain any necessary change to those requirements.
 - Report what changed, why, what was verified, and any remaining limitations.

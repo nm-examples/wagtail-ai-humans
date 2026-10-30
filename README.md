@@ -15,6 +15,12 @@ This repository includes two local skills:
   own templates for creating another site. Invoke it with `$wagtail-bootstrap`
   and supply the new project directory and site name.
 
+The development workflow defines commit boundaries, commits verified increments
+locally by default, reviews staged changes, reassesses oversized commits, and
+reports commit IDs and remaining work. User Git instructions take precedence;
+pushing and merging require explicit requests. These are workflow instructions,
+with no Git hooks, CI enforcement, or numerical commit-size limits added.
+
 ## Project folders
 
 Work on this project spans two sibling repositories:
