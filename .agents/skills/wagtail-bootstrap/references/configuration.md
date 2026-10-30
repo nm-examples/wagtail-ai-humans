@@ -52,8 +52,8 @@ preserving their contents:
 Inspect the actual generated scaffold and adapt these moves if its paths differ.
 Keep an `assets/images/` directory for design images, using `.gitkeep` if empty.
 Remove emptied project static directories; leave Wagtail and third-party package
-assets in place. Do not replace the fresh welcome page or copy assets from the
-source repository.
+assets in place. Preserve the fresh welcome markup and assets rather than copying
+them from the source repository.
 
 In `config/settings/base.py`, set `STATICFILES_DIRS = [BASE_DIR / "assets"]`.
 Keep `STATIC_ROOT = BASE_DIR / "static"` as the separate production collection
@@ -67,6 +67,29 @@ styling uses named CSS classes in separate stylesheets; focused files can be
 added within the central folders and loaded through `extra_css` or `extra_js`.
 Uploaded content stays in `media/`, outside the version-controlled design assets.
 The bundled README documents this layout for the generated site's developers.
+
+## Home page template
+
+Keep the welcome content directly in `home/templates/home/home_page.html` so
+the starter home page can be edited in one template:
+
+1. Replace `{% include 'home/welcome_page.html' %}` inside the home page's
+   `content` block with the markup from the generated
+   `home/templates/home/welcome_page.html`. Inspect the fresh scaffold and adapt
+   these paths if the installed Wagtail version generates a different layout.
+2. Merge the included template's tag libraries into the home page's top-level
+   `{% load %}` tag. The default welcome content needs `i18n` and
+   `wagtailcore_tags` alongside `static`; preserve its translation tags, SVGs,
+   documentation links, release notes, and admin URL.
+3. Keep the base-template extension, body class, and `extra_css` block loading
+   `css/welcome.css`. Remove generated comments that refer to deleting the
+   include line, since that instruction no longer applies.
+4. Check for remaining references to `home/welcome_page.html`, then remove the
+   unused template. If the scaffold already inlines the content, retain that
+   structure rather than introducing an include.
+
+Verify that the rendered welcome content, link destinations, and appearance are
+preserved and that the home page no longer depends on the removed include.
 
 ## Configuration invariants
 
