@@ -112,14 +112,22 @@ completed work from proposed follow-up increments.
 ## Git workflow
 
 Apply these requirements unless the user gives different Git instructions. They
-guide commit decisions; they do not imply hooks, CI, a branch policy, or numerical
+guide Git decisions; they do not imply hooks, CI enforcement, or numerical
 commit-size limits are configured.
 
-1. **Define commit boundaries before substantial work.** Describe the intended
+1. **Start new work on an approved branch.** Before implementation, propose a
+   descriptive branch name reflecting the requested changes and wait for developer
+   approval before creating it. Normally base the branch on the repository's default
+   branch; identify that branch rather than assuming its name. If the work depends
+   on unmerged changes or needs another base, explain why and propose the base
+   alongside the branch name. No fixed prefix is required; category prefixes such
+   as `feat/`, `bugfix/`, and `docs/` are suitable. Preserve existing uncommitted
+   work and keep unrelated changes out of the new branch's commits.
+2. **Define commit boundaries before substantial work.** Describe the intended
    commits briefly as part of the scope assessment. Each commit should explain
    one coherent change, including its relevant tests, migrations, and documentation.
    A small correction can be a single commit without a separate written plan.
-2. **Prepare verified increments for user review before committing.** Complete
+3. **Prepare verified increments for user review before committing.** Complete
    implementation and relevant checks, then leave changes unstaged and uncommitted.
    Present what changed, verification results, limitations, and how to review the
    result. Commit only after the user explicitly authorises committing the reviewed
@@ -130,26 +138,47 @@ commit-size limits are configured.
    verification gap and leave the affected work uncommitted when the gap prevents
    establishing that the increment is ready. Continue later authorised implementation
    increments while leaving them uncommitted for review.
-3. **Review the staged diff before every commit.** After the user authorises a
+4. **Review the staged diff before every commit.** After the user authorises a
    commit, inspect Git status and distinguish existing user changes from this
    task's changes. Stage only the intended files or hunks, inspect the complete
    staged diff, and run
    `git diff --cached --check`. Check for accidental files, unrelated edits, secrets,
    and the reported verification results. Do not include someone else's staged
-   changes; ask when overlapping changes cannot be separated safely. Use a message
-   describing the concrete purpose of the change.
-4. **Reassess oversized changes.** Use changed-file and line counts as signals to
+   changes; ask when overlapping changes cannot be separated safely. Use a short,
+   imperative commit subject with an appropriate prefix: `feat:`, `fix:`, `docs:`,
+   `refactor:`, `test:`, or `chore:`. Describe the actual changes included. Add a body
+   only when useful to explain the reason or a significant decision.
+5. **Reassess oversized changes.** Use changed-file and line counts as signals to
    inspect scope, not hard thresholds. Split independent behaviours and unrelated
    refactoring. Keep inseparable changes together and explain an unusually broad
    commit when its coherence is not obvious. Do not split simply to meet a count.
-5. **Report commits and remaining work.** Verify Git status after committing and
+6. **Report commits and remaining work.** Verify Git status after committing and
    report each repository's commit IDs, completed outcomes, and remaining work or
    uncommitted changes. Distinguish pre-existing user changes from unfinished work.
 
-Keep commits local unless pushing or merging is explicitly requested. Do not
-rewrite existing commits or change repository configuration to satisfy this
-workflow. If the destination is not its own Git repository, report that no commit
-was made rather than committing into an enclosing repository. For mirrored skill
+Keep commits local unless the user explicitly approves a push as described below.
+Merging requires an explicit user request. Do not rewrite existing commits or
+change repository configuration to satisfy this workflow. If the destination is
+not its own Git repository, report that no commit was made rather than committing
+into an enclosing repository. For mirrored skill
 changes, verify the copies match and obtain explicit user authorisation before
 committing the corresponding reviewed increment in each repository; report any
 partial completion if one repository cannot be updated or committed.
+
+## Remote actions and pull requests
+
+Obtain explicit user approval before each push to a remote and before creating
+any pull request, including a draft. Approval to implement or commit changes does
+not authorise either action; approval to push does not authorise creating a pull
+request. Prepare the concrete action details before asking: the remote, target
+branch, and included commits for a push; the source and base branches, title, and
+description for a pull request.
+
+Create every pull request as a draft. Leave it as a draft until the user explicitly
+approves marking it ready for review.
+
+Every pull request needs a description. Use the minimum content needed to explain
+what changed and why. Include testing notes where useful, particularly verification
+gaps or steps a reviewer should try. Add screenshots when they help explain visual
+changes. Describe the changes actually included in the pull request, without
+unrelated context or unnecessary boilerplate.

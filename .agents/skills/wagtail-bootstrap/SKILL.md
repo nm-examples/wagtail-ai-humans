@@ -27,7 +27,11 @@ an external reference checkout.
 1. Inspect the destination and applicable repository instructions. Proceed in
    an empty project directory, allowing an existing Git repository. Do not
    overwrite existing application files or reset databases. Surface actual
-   conflicts before continuing with dependent work.
+   conflicts before continuing with dependent work. If the destination is its own
+   Git repository, follow the bundled development skill's branch workflow before
+   generating files: propose a descriptive branch name and base, normally the
+   default branch, and wait for developer approval before creating the branch.
+   No fixed branch-name prefix is required.
 2. Run `uv init --bare --python <version>` and `uv python pin <version>`, then
    `uv add wagtail` and `uv run wagtail start config .` in the destination.
 3. Add `gunicorn`, `psycopg[binary]>=3.2,<4`, and `whitenoise` with uv. Review
@@ -85,5 +89,10 @@ and when the destination is its own Git repository. Review the staged diff befor
 that commit.
 If the destination is not its own Git repository, report that no commit was made;
 do not commit into an enclosing source repository. Report the commit ID and any
-remaining work. Pushing and merging require explicit requests. Keep existing data
-and unrelated services intact.
+remaining work. Use a concise, imperative commit subject with an appropriate type
+prefix, following the development skill. Each push and pull-request creation
+requires explicit approval; prepare the concrete action details and any
+pull-request text before asking. Create every pull request as a draft, with a
+concise description of what changed and why, plus testing notes and screenshots
+where useful. Obtain approval before marking it ready for review. Merging requires
+an explicit request. Keep existing data and unrelated services intact.
