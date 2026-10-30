@@ -15,11 +15,14 @@ This repository includes two local skills:
   own templates for creating another site. Invoke it with `$wagtail-bootstrap`
   and supply the new project directory and site name.
 
-The development workflow defines commit boundaries, commits verified increments
-locally by default, reviews staged changes, reassesses oversized commits, and
-reports commit IDs and remaining work. User Git instructions take precedence;
-pushing and merging require explicit requests. These are workflow instructions,
-with no Git hooks, CI enforcement, or numerical commit-size limits added.
+The development workflow defines commit boundaries and leaves verified increments
+unstaged and uncommitted for user review. Commits require explicit user
+authorisation after review; a request to implement a change does not authorise a
+commit. The agent reviews staged changes before each authorised commit, reassesses
+oversized changes, and reports commit IDs and remaining work. User Git instructions
+take precedence; pushing and merging require explicit requests. These are workflow
+instructions, with no Git hooks, CI enforcement, or numerical commit-size limits
+added.
 
 ## Project folders
 

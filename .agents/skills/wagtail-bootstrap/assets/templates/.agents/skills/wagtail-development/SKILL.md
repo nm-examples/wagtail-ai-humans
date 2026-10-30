@@ -119,17 +119,21 @@ commit-size limits are configured.
    commits briefly as part of the scope assessment. Each commit should explain
    one coherent change, including its relevant tests, migrations, and documentation.
    A small correction can be a single commit without a separate written plan.
-2. **Commit each completed, verified increment.** Make local commits by default,
-   rather than accumulating finished features or waiting for another commit
-   request. Verification is proportional to the change, as described above.
-   Do not commit unfinished work or a change with unresolved relevant failures;
-   explain any verification gap and leave the affected work uncommitted when the
-   gap prevents establishing that the increment is ready. Keep working on later
-   authorised increments after committing earlier ones. If the user asks to leave
-   changes uncommitted or review them first, honour that instruction.
-3. **Review the staged diff before every commit.** Inspect Git status first and
-   distinguish existing user changes from this task's changes. Stage only the
-   intended files or hunks, inspect the complete staged diff, and run
+2. **Prepare verified increments for user review before committing.** Complete
+   implementation and relevant checks, then leave changes unstaged and uncommitted.
+   Present what changed, verification results, limitations, and how to review the
+   result. Commit only after the user explicitly authorises committing the reviewed
+   changes. A request to implement a change does not authorise a commit. Automated
+   checks and the agent's own diff inspection do not replace user review.
+   Verification is proportional to the change, as described above. Do not commit
+   unfinished work or a change with unresolved relevant failures; explain any
+   verification gap and leave the affected work uncommitted when the gap prevents
+   establishing that the increment is ready. Continue later authorised implementation
+   increments while leaving them uncommitted for review.
+3. **Review the staged diff before every commit.** After the user authorises a
+   commit, inspect Git status and distinguish existing user changes from this
+   task's changes. Stage only the intended files or hunks, inspect the complete
+   staged diff, and run
    `git diff --cached --check`. Check for accidental files, unrelated edits, secrets,
    and the reported verification results. Do not include someone else's staged
    changes; ask when overlapping changes cannot be separated safely. Use a message
@@ -146,5 +150,6 @@ Keep commits local unless pushing or merging is explicitly requested. Do not
 rewrite existing commits or change repository configuration to satisfy this
 workflow. If the destination is not its own Git repository, report that no commit
 was made rather than committing into an enclosing repository. For mirrored skill
-changes, verify the copies match and commit the corresponding increment in each
-repository; report any partial completion if one repository cannot be committed.
+changes, verify the copies match and obtain explicit user authorisation before
+committing the corresponding reviewed increment in each repository; report any
+partial completion if one repository cannot be updated or committed.

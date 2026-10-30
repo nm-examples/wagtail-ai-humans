@@ -78,9 +78,11 @@ Leave production credentials unset and explain that HTTPS, upload delivery,
 email, and backups are completed for the chosen host. Production support here
 does not authorize deployment. Follow the bundled
 [development skill's Git workflow](assets/templates/.agents/skills/wagtail-development/SKILL.md#git-workflow):
-treat the validated bootstrap as one coherent increment and commit it locally
-when the destination is its own Git repository, unless the user requests otherwise.
-Review the staged diff and include the generated lockfile and project guidance.
+treat the validated bootstrap as one coherent increment and leave it unstaged and
+uncommitted for user review, including the generated lockfile and project guidance.
+Commit only after the user explicitly authorises committing the reviewed changes
+and when the destination is its own Git repository. Review the staged diff before
+that commit.
 If the destination is not its own Git repository, report that no commit was made;
 do not commit into an enclosing source repository. Report the commit ID and any
 remaining work. Pushing and merging require explicit requests. Keep existing data
