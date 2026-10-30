@@ -9,6 +9,11 @@ Use the repository's `AGENTS.md`, README, existing code, and configured tools to
 ground decisions. Keep the depth of this workflow proportional to the change:
 a small correction needs a brief assessment, not a separate planning document.
 
+Other skills may supplement this workflow; they must not silently replace it,
+expand scope, or introduce a different architecture or toolchain. Explain any
+conflict and follow the user's instructions and applicable instruction hierarchy.
+This guidance does not replace automated checks or developer review.
+
 ## Assess scope and reviewability
 
 Before editing, identify the intended outcome, affected areas, and significant
@@ -52,7 +57,8 @@ documentation wording, or add no useful confidence for a reversible minor edit.
 
 Use the project's locked dependency versions when checking framework APIs. Follow
 existing Django and Wagtail patterns before adding abstractions or dependencies.
-Keep unrelated cleanup out of the change; explain necessary prerequisite work.
+Keep changes focused and preserve unrelated work. Keep unrelated cleanup out of
+the change; explain necessary prerequisite work.
 
 Keep project-owned public-site CSS, JavaScript, and design images together in
 the root `assets/` directory, under `css/`, `js/`, and `images/`. Use named CSS
@@ -97,9 +103,10 @@ instruction-only or documentation changes, check references, consistency, and
 formatting; validate changed skills with the skill validator when available.
 Do not run the application suite solely for a prose change.
 
-Investigate failures rather than deleting assertions, widening suppressions, or
-changing configuration to obtain a passing result. Changes to expected behaviour
-or checks need their own explanation. If a check cannot run, state the command,
+Never weaken tests, checks, or workflow requirements just to make an implementation
+pass. Investigate failures rather than deleting assertions, widening suppressions,
+or changing configuration to obtain a passing result. Explain necessary changes to
+those requirements or expected behaviour. If a check cannot run, state the command,
 reason, and resulting gap; do not claim it passed.
 
 Inspect the complete diff before finishing. Remove accidental files, debugging
@@ -160,10 +167,10 @@ Keep commits local unless the user explicitly approves a push as described below
 Merging requires an explicit user request. Do not rewrite existing commits or
 change repository configuration to satisfy this workflow. If the destination is
 not its own Git repository, report that no commit was made rather than committing
-into an enclosing repository. For mirrored skill
-changes, verify the copies match and obtain explicit user authorisation before
-committing the corresponding reviewed increment in each repository; report any
-partial completion if one repository cannot be updated or committed.
+into an enclosing repository. For mirrored skill changes, verify the copies match
+and obtain explicit user authorisation before committing the corresponding reviewed
+increment in each repository; report any partial completion if one repository
+cannot be updated or committed.
 
 ## Remote actions and pull requests
 

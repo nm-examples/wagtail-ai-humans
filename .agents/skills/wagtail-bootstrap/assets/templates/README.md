@@ -8,31 +8,10 @@ in `pyproject.toml` and `uv.lock`.
 
 [AGENTS.md](AGENTS.md) directs application work to the repository-local
 [`wagtail-development` skill](.agents/skills/wagtail-development/SKILL.md).
-It covers focused scope, meaningful verification, and clear code review. Invoke
-it explicitly with `$wagtail-development`. Both the instructions and skill are
+The skill owns the shared development, Git, and pull-request rules. Invoke it
+explicitly with `$wagtail-development`. Both the instructions and skill are
 included in this project; no source checkout or user-level installation is needed.
 They can evolve with this site's own requirements.
-
-Start each new piece of work on a new branch, normally based on the repository's
-default branch. Propose a descriptive name and base for developer approval before
-creating it or starting implementation. Category prefixes such as `feat/`,
-`bugfix/`, and `docs/` are suitable; no fixed prefix is required.
-
-The workflow defines commit boundaries and leaves verified increments unstaged and
-uncommitted for user review. Commits require explicit user authorisation after
-review; a request to implement a change does not authorise a commit. The agent
-reviews staged changes before each authorised commit, reassesses oversized changes,
-and reports commit IDs and remaining work. Use short, imperative commit subjects
-with an appropriate prefix such as `feat:`, `fix:`, or `docs:`, and add a body only
-when it helps explain the reason or a significant decision.
-
-Each push and pull-request creation requires explicit approval. Create every pull
-request as a draft and obtain approval before marking it ready for review. Every
-pull request needs a concise description explaining what changed and why, with
-testing notes and screenshots where useful. Prepare the action details and any
-pull-request text before requesting approval. User Git instructions take precedence;
-merging requires an explicit request. No Git hooks, CI enforcement, or numerical
-commit-size limits are included in this starter.
 
 ## Local development
 
