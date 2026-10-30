@@ -34,7 +34,9 @@ an external reference checkout.
    generated requirements and preserve any additional dependencies or necessary
    constraints in `pyproject.toml` before removing `requirements.txt`.
 4. Render and copy [the bundled templates](assets/templates/) into the new
-   project, including dotfiles and production settings. Replace these tokens:
+   project, including dotfiles, production settings, `AGENTS.md`, and the bundled
+   `.agents/skills/wagtail-development/` directory with its UI metadata. Replace
+   these tokens:
 
    | Token | Value |
    | --- | --- |
@@ -46,7 +48,10 @@ an external reference checkout.
    | `__HTTP_PORT__` | Available host HTTP port; container port stays 8000 |
 
    Do not copy this repository's `pyproject.toml`, lockfile, generated secret
-   key, database, uploads, Git history, or skill folder into the new site.
+   key, database, uploads, Git history, root `AGENTS.md`, or bootstrap skill folder
+   into the new site. Use the bundled project `AGENTS.md`, which has no dependency
+   on the source repositories or their mirroring requirements. The development
+   skill is deliberately included; do not copy unrelated installed skills.
 5. Follow [Django settings and validation](references/configuration.md) to adapt
    the newly generated base and development settings. Keep the fresh Wagtail
    scaffold; make targeted changes instead of copying this site's base settings.

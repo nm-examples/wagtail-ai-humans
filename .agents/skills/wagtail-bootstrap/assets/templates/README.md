@@ -4,6 +4,15 @@ Wagtail CMS with Python __PYTHON_VERSION__, PostgreSQL __POSTGRES_MAJOR__, uv,
 Docker Compose, and just. Dependencies are resolved for this site and recorded
 in `pyproject.toml` and `uv.lock`.
 
+## Development workflow
+
+[AGENTS.md](AGENTS.md) directs application work to the repository-local
+[`wagtail-development` skill](.agents/skills/wagtail-development/SKILL.md).
+It covers focused scope, meaningful verification, and clear code review. Invoke
+it explicitly with `$wagtail-development`. Both the instructions and skill are
+included in this project; no source checkout or user-level installation is needed.
+They can evolve with this site's own requirements.
+
 ## Local development
 
 Install Docker with Compose and just, then run from the project directory:

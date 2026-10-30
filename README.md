@@ -4,25 +4,36 @@ Wagtail CMS with Python 3.14, PostgreSQL 18, and dependencies managed by uv. Doc
 the main local development workflow. Docker's default build target is a separate
 production image.
 
-This repository also includes the local
-[`wagtail-bootstrap` skill](.agents/skills/wagtail-bootstrap/SKILL.md), with its
-own templates for creating another site. Invoke it here with
-`$wagtail-bootstrap` and supply the new project directory and site name.
+This repository includes two local skills:
+
+- [`wagtail-development`](.agents/skills/wagtail-development/SKILL.md) guides
+  ongoing application work: assessing scope, defining expected behaviour,
+  implementing reviewable increments, and reporting verification. Invoke it with
+  `$wagtail-development`; [AGENTS.md](AGENTS.md) also directs agents to use it for
+  application development and review.
+- [`wagtail-bootstrap`](.agents/skills/wagtail-bootstrap/SKILL.md) includes its
+  own templates for creating another site. Invoke it with `$wagtail-bootstrap`
+  and supply the new project directory and site name.
 
 ## Project folders
 
 Work on this project spans two sibling repositories:
 
-- `wagtail-ai-humans/`: the Wagtail application and its local bootstrap skill.
-- `../wagtail-ai-humans-base/`: the captured, reusable copy of that skill.
+- `wagtail-ai-humans/`: the Wagtail application and its repository skills.
+- `../wagtail-ai-humans-base/`: the reusable copies of both skills and bootstrap
+  resources.
 
-When updating `.agents/skills/wagtail-bootstrap/`, copy the complete update to
-the matching directory in `wagtail-ai-humans-base`, including templates,
-references, UI metadata, and resource additions or removals. Preserve unrelated
-application changes and independent edits in either repository.
+When updating either skill, copy the complete update to the matching directory in
+`wagtail-ai-humans-base`, including templates, references, UI metadata, and resource
+additions or removals. When changing `wagtail-development`, also update its bundled
+copy at `.agents/skills/wagtail-bootstrap/assets/templates/.agents/skills/wagtail-development/`
+before mirroring the bootstrap skill. Preserve unrelated application changes and
+independent edits in either repository.
 
-For now, neither repository has an `AGENTS.md`; separate agent instruction files
-will be introduced for each codebase when needed.
+Both repositories have their own `AGENTS.md` appropriate to their role. Bootstrap
+templates include project instructions and the development skill so new sites
+carry the workflow independently. Generated sites do not inherit the source
+repositories' sibling-mirroring requirements or the bootstrap skill itself.
 
 ## Local development
 

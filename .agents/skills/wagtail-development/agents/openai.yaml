@@ -1,0 +1,3 @@
+interface:
+  display_name: "Wagtail Development"
+  short_description: "Develop Wagtail changes with focused scope and clear checks"

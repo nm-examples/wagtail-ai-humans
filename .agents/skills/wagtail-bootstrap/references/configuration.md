@@ -62,6 +62,12 @@ placeholder values must not become runtime environment defaults.
 
 ## Validate the generated project
 
+Check that `AGENTS.md` links to the included
+`.agents/skills/wagtail-development/SKILL.md`, that the skill includes its
+`agents/openai.yaml`, and that the README links resolve locally. The generated
+guidance must not reference source repository paths or sibling mirroring. Validate
+the included development skill with the skill validator when available.
+
 Run from the new project, using its distinct Compose project name. If its
 directory basename would reuse another site's resources, set a distinct name in
 `compose.yaml` or use `COMPOSE_PROJECT_NAME` consistently for that new stack.
