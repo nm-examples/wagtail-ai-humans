@@ -53,8 +53,10 @@ an external reference checkout.
    on the source repositories or their mirroring requirements. The development
    skill is deliberately included; do not copy unrelated installed skills.
 5. Follow [Django settings and validation](references/configuration.md) to adapt
-   the newly generated base and development settings. Keep the fresh Wagtail
-   scaffold; make targeted changes instead of copying this site's base settings.
+   the newly generated base and development settings and centralize public-site
+   assets in root `assets/`. Preserve the generated welcome page's appearance and
+   keep Wagtail and third-party package assets in place. Make targeted changes to
+   the fresh scaffold instead of copying this site's base settings or assets.
 6. Build and start the development stack, apply migrations explicitly, initialize
    search, and run the validation described in that reference. Build the
    production target without needing a live production database or credentials.

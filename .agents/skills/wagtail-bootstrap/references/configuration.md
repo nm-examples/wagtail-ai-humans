@@ -37,6 +37,37 @@ The production settings template requires explicit credentials, uses
 after SecurityMiddleware. Keep static collection at build time; the build-only
 placeholder values must not become runtime environment defaults.
 
+## Public-site assets
+
+Centralize the fresh scaffold's project-owned CSS, JavaScript, and design images
+in root `assets/`. For the default `config` scaffold, move files as follows,
+preserving their contents:
+
+| Generated source | Destination |
+| --- | --- |
+| `config/static/css/config.css` | `assets/css/site.css` |
+| `config/static/js/config.js` | `assets/js/site.js` |
+| `home/static/css/welcome_page.css` | `assets/css/welcome.css` |
+
+Inspect the actual generated scaffold and adapt these moves if its paths differ.
+Keep an `assets/images/` directory for design images, using `.gitkeep` if empty.
+Remove emptied project static directories; leave Wagtail and third-party package
+assets in place. Do not replace the fresh welcome page or copy assets from the
+source repository.
+
+In `config/settings/base.py`, set `STATICFILES_DIRS = [BASE_DIR / "assets"]`.
+Keep `STATIC_ROOT = BASE_DIR / "static"` as the separate production collection
+destination and retain `AppDirectoriesFinder` for package assets. Update the
+base template to load `css/site.css` and `js/site.js` with the `static` tag, and
+the homepage's `extra_css` block to load `css/welcome.css`. Update any other
+references affected by the moves. Templates stay in their generated locations.
+
+Use ordinary CSS and JavaScript without adding compilation tooling. Shared
+styling uses named CSS classes in separate stylesheets; focused files can be
+added within the central folders and loaded through `extra_css` or `extra_js`.
+Uploaded content stays in `media/`, outside the version-controlled design assets.
+The bundled README documents this layout for the generated site's developers.
+
 ## Configuration invariants
 
 - PostgreSQL and web credentials match within each Compose stack. Development
@@ -87,7 +118,12 @@ docker build --target production -t <site-slug>:production .
 
 Verify the actual selected database backend and connectivity, not only that
 settings load. Confirm the home page, admin login, search, and static assets
-respond over HTTP. Touch a generated Python file without changing its content
+respond over HTTP. Confirm the rendered home page references `css/site.css`,
+`css/welcome.css`, and `js/site.js`, and each URL serves the corresponding file.
+Check in the browser that the welcome page retains its appearance. Verify the
+production image collects and serves these assets through its manifest storage;
+a successful build alone does not establish that they are reachable.
+Touch a generated Python file without changing its content
 and verify Django reports a reload and continues serving requests. Check that
 PostgreSQL data survives recreation of its container using the new stack's own
 volume. Leave the user's other projects and services running.

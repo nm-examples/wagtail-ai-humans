@@ -54,6 +54,19 @@ Use the project's locked dependency versions when checking framework APIs. Follo
 existing Django and Wagtail patterns before adding abstractions or dependencies.
 Keep unrelated cleanup out of the change; explain necessary prerequisite work.
 
+Keep project-owned public-site CSS, JavaScript, and design images together in
+the root `assets/` directory, under `css/`, `js/`, and `images/`. Use named CSS
+classes in separate stylesheets. Add focused files there as needed rather than
+creating app-level static folders or forcing everything into one file. Load
+shared assets from the base template and page-specific assets through its
+`extra_css` and `extra_js` blocks. Leave Wagtail and third-party package assets
+in their existing locations.
+
+Use ordinary CSS and JavaScript unless the project explicitly adopts compilation
+tooling in a separate change. Django discovers source assets through
+`STATICFILES_DIRS`; root `static/` is generated collection output, and `media/`
+holds uploads. Do not edit collected files as source assets.
+
 Add useful type annotations to new or substantially changed application functions,
 keeping framework overrides compatible. Treat incomplete framework typing as a
 specific limitation to investigate, not a reason for broad `Any` or ignore rules.
