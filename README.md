@@ -31,32 +31,32 @@ references to linting or frontend builds apply when those tools are configured.
 
 The imported directories are version-controlled copies. Their
 [provenance and update notes](.agents/skills/PROVENANCE.md) record the source
-commit, preserved licence material, and update process. They are included only
-in this application, with no dependency on a sibling checkout.
+commit, preserved licence material, and update process. They are mirrored into
+the base repository and bundled for new sites. Each site can use its copies
+without a sibling checkout.
 
 ## Project folders
 
 Work on this project spans two sibling repositories:
 
 - `wagtail-ai-humans/`: the Wagtail application and its repository skills.
-- `../wagtail-ai-humans-base/`: the reusable copies of `ai-humans-development`,
-  `ai-humans-bootstrap`, and bootstrap resources.
+- `../wagtail-ai-humans-base/`: the reusable copies of all seven skills and
+  bootstrap resources.
 
-When updating either workflow skill, copy the complete update to the matching
-directory in `wagtail-ai-humans-base`, including templates, references, UI
-metadata, and resource additions or removals. When changing `ai-humans-development`,
-also update its bundled copy at
-`.agents/skills/ai-humans-bootstrap/assets/templates/.agents/skills/ai-humans-development/`
-before mirroring the bootstrap skill. Preserve unrelated application changes and
-independent edits in either repository.
+When updating a skill, copy the complete update to the matching directory in
+`wagtail-ai-humans-base`, including templates, references, UI metadata, and resource
+additions or removals. For `ai-humans-development` and the five imported technical
+skills, also update their bundled directories under
+`.agents/skills/ai-humans-bootstrap/assets/templates/.agents/skills/`
+before mirroring the bootstrap skill. Keep the imported skills' provenance and
+licence material current in both repositories and their templates. Preserve
+unrelated application changes and independent edits in either repository.
 
 Both repositories have their own `AGENTS.md` appropriate to their role. Bootstrap
-templates include project instructions and the development skill so new sites
-carry the workflow independently. Generated sites do not inherit the source
+templates include project instructions, `ai-humans-development`, and the five
+technical skills with their provenance and licence material. New sites carry
+these six skills independently. Generated sites do not inherit the source
 repositories' sibling-mirroring requirements or the bootstrap skill itself.
-
-The five imported technical skills are not currently mirrored into the base
-repository or included in bootstrap templates.
 
 ## Local development
 

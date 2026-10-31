@@ -37,7 +37,13 @@ Keep project-specific workflow and tool instructions in the project's
 `AGENTS.md` and `ai-humans-development` skill so the imported content stays easy
 to compare with its source. The imported skills supplement that workflow.
 
-These copies belong to this application only. They are not mirrored into
-`wagtail-ai-humans-base` or bundled in the bootstrap templates. Adding them to
-generated sites would be a separate change. The application does not require
-the sibling source checkout to use these skills.
+Maintain matching copies in `wagtail-ai-humans` and `wagtail-ai-humans-base`,
+including the bundled copies under
+`ai-humans-bootstrap/assets/templates/.agents/skills/`. Mirror complete skill
+directories, licence material, and applicable provenance notes together. Follow
+each repository's README for the source-maintenance workflow.
+
+Generated sites receive standalone skill copies, licence material, and their own
+provenance notes. They can evolve independently and do not inherit these
+source-specific mirroring instructions. Using the skills does not require a
+sibling source checkout.

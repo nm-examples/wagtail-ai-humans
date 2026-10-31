@@ -9,9 +9,25 @@ in `pyproject.toml` and `uv.lock`.
 [AGENTS.md](AGENTS.md) directs application work to the repository-local
 [`ai-humans-development` skill](.agents/skills/ai-humans-development/SKILL.md).
 The skill owns the shared development, Git, and pull-request rules. Invoke it
-explicitly with `$ai-humans-development`. Both the instructions and skill are
-included in this project; no source checkout or user-level installation is needed.
-They can evolve with this site's own requirements.
+explicitly with `$ai-humans-development`.
+
+Five local technical skills supplement that workflow:
+
+| Skill | Use for |
+| --- | --- |
+| [`wagtail-content-modeling`](.agents/skills/wagtail-content-modeling/SKILL.md) | Page types, snippets, fields, StreamField, editor interfaces, and content migrations. |
+| [`wagtail-backend`](.agents/skills/wagtail-backend/SKILL.md) | Queries, search, permissions, publishing, workflows, and runtime behavior. |
+| [`wagtail-frontend`](.agents/skills/wagtail-frontend/SKILL.md) | Templates, accessibility, media, metadata, and editor previews. |
+| [`wagtail-api`](.agents/skills/wagtail-api/SKILL.md) | API v3 configuration and integrations. |
+| [`wagtail-upgrade`](.agents/skills/wagtail-upgrade/SKILL.md) | Wagtail upgrade planning and implementation. |
+
+Use only the technical skills relevant to a task, following the configured
+Docker, uv, and `just` workflow. References to linting or frontend builds apply
+when those tools are configured. All six skills are included in this project;
+no source checkout or user-level installation is needed. They can evolve with
+this site's own requirements. The imported skills' source commit, licence
+material, and update guidance are recorded in
+[the provenance notes](.agents/skills/PROVENANCE.md).
 
 ## Local development
 

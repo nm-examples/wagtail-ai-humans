@@ -116,11 +116,14 @@ preserved and that the home page no longer depends on the removed include.
 
 ## Validate the generated project
 
-Check that `AGENTS.md` links to the included
-`.agents/skills/ai-humans-development/SKILL.md`, that the skill includes its
-`agents/openai.yaml`, and that the README links resolve locally. The generated
-guidance must not reference source repository paths or sibling mirroring. Validate
-the included development skill with the skill validator when available.
+Check that `AGENTS.md` and the README link to all six included skills:
+`ai-humans-development`, `wagtail-content-modeling`, `wagtail-backend`,
+`wagtail-frontend`, `wagtail-api`, and `wagtail-upgrade`. Confirm that the development
+skill includes its `agents/openai.yaml` and that the imported skills' provenance
+and licence material are included. Validate all six skills with the skill
+validator when available and check that local documentation links resolve.
+The generated guidance and provenance must not require source repository paths
+or sibling mirroring. Retain source attribution links for the imported skills.
 
 Run from the new project, using its distinct Compose project name. If its
 directory basename would reuse another site's resources, set a distinct name in

@@ -23,7 +23,7 @@ configured tools and commands when applying their verification guidance.
 Use the Docker, uv, and `just` workflow documented in [README.md](README.md).
 For creating a separate new site, use the
 [bootstrap skill](.agents/skills/ai-humans-bootstrap/SKILL.md).
-When changing `ai-humans-development` or `ai-humans-bootstrap`, follow the
+When changing repository skills, follow the
 [copy and mirroring instructions](README.md#project-folders).
 For the five imported technical skills, follow their
 [provenance and update notes](.agents/skills/PROVENANCE.md).
