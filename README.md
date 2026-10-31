@@ -4,7 +4,7 @@ Wagtail CMS with Python 3.14, PostgreSQL 18, and dependencies managed by uv. Doc
 the main local development workflow. Docker's default build target is a separate
 production image.
 
-This repository includes two local skills:
+This repository includes seven local skills. Two define the project workflow:
 
 - [`wagtail-development`](.agents/skills/wagtail-development/SKILL.md) guides
   ongoing application work and owns the shared development, Git, and pull-request
@@ -14,18 +14,39 @@ This repository includes two local skills:
   own templates for creating another site. Invoke it with `$wagtail-bootstrap`
   and supply the new project directory and site name.
 
+Five imported skills provide technical guidance alongside `wagtail-development`:
+
+| Skill | Use for |
+| --- | --- |
+| [`wagtail-content-modeling`](.agents/skills/wagtail-content-modeling/SKILL.md) | Page types, snippets, fields, StreamField, editor interfaces, and content migrations. |
+| [`wagtail-backend`](.agents/skills/wagtail-backend/SKILL.md) | Queries, search, permissions, publishing, workflows, and runtime behavior. |
+| [`wagtail-frontend`](.agents/skills/wagtail-frontend/SKILL.md) | Templates, accessibility, media, metadata, and editor previews. |
+| [`wagtail-api`](.agents/skills/wagtail-api/SKILL.md) | API v3 configuration and integrations. |
+| [`wagtail-upgrade`](.agents/skills/wagtail-upgrade/SKILL.md) | Wagtail upgrade planning and implementation. |
+
+Use only the technical skills relevant to a task. The development skill continues
+to govern scope, project conventions, verification, Git, and pull requests. Use
+the configured Docker, uv, and `just` workflow when applying technical guidance;
+references to linting or frontend builds apply when those tools are configured.
+
+The imported directories are version-controlled copies. Their
+[provenance and update notes](.agents/skills/PROVENANCE.md) record the source
+commit, preserved licence material, and update process. They are included only
+in this application, with no dependency on a sibling checkout.
+
 ## Project folders
 
 Work on this project spans two sibling repositories:
 
 - `wagtail-ai-humans/`: the Wagtail application and its repository skills.
-- `../wagtail-ai-humans-base/`: the reusable copies of both skills and bootstrap
-  resources.
+- `../wagtail-ai-humans-base/`: the reusable copies of `wagtail-development`,
+  `wagtail-bootstrap`, and bootstrap resources.
 
-When updating either skill, copy the complete update to the matching directory in
-`wagtail-ai-humans-base`, including templates, references, UI metadata, and resource
-additions or removals. When changing `wagtail-development`, also update its bundled
-copy at `.agents/skills/wagtail-bootstrap/assets/templates/.agents/skills/wagtail-development/`
+When updating either workflow skill, copy the complete update to the matching
+directory in `wagtail-ai-humans-base`, including templates, references, UI
+metadata, and resource additions or removals. When changing `wagtail-development`,
+also update its bundled copy at
+`.agents/skills/wagtail-bootstrap/assets/templates/.agents/skills/wagtail-development/`
 before mirroring the bootstrap skill. Preserve unrelated application changes and
 independent edits in either repository.
 
@@ -33,6 +54,9 @@ Both repositories have their own `AGENTS.md` appropriate to their role. Bootstra
 templates include project instructions and the development skill so new sites
 carry the workflow independently. Generated sites do not inherit the source
 repositories' sibling-mirroring requirements or the bootstrap skill itself.
+
+The five imported technical skills are not currently mirrored into the base
+repository or included in bootstrap templates.
 
 ## Local development
 
