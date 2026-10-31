@@ -1,9 +1,9 @@
 ---
-name: wagtail-bootstrap
+name: ai-humans-bootstrap
 description: "Bootstrap a new Wagtail CMS site using this repository's uv, Docker, PostgreSQL, and just conventions. Use when creating a new site from an empty project; not for upgrading an existing application, migrating existing data, or deploying to a live host."
 ---
 
-# Wagtail Bootstrap
+# AI Humans Bootstrap
 
 Create a working local development stack and a separately buildable production
 image. Use PostgreSQL for both environments. This is a repository-local skill;
@@ -28,7 +28,7 @@ an external reference checkout.
    an empty project directory, allowing an existing Git repository. Do not
    overwrite existing application files or reset databases. Surface actual
    conflicts before continuing with dependent work. Read the bundled
-   [development skill](assets/templates/.agents/skills/wagtail-development/SKILL.md)
+   [development skill](assets/templates/.agents/skills/ai-humans-development/SKILL.md)
    and apply its Git and pull-request workflow to bootstrap work. When the
    destination is its own Git repository, follow its branch workflow before
    generating files.
@@ -39,7 +39,7 @@ an external reference checkout.
    constraints in `pyproject.toml` before removing `requirements.txt`.
 4. Render and copy [the bundled templates](assets/templates/) into the new
    project, including dotfiles, production settings, `AGENTS.md`, and the bundled
-   `.agents/skills/wagtail-development/` directory with its UI metadata. Replace
+   `.agents/skills/ai-humans-development/` directory with its UI metadata. Replace
    these tokens:
 
    | Token | Value |

@@ -6,15 +6,15 @@ production image.
 
 This repository includes seven local skills. Two define the project workflow:
 
-- [`wagtail-development`](.agents/skills/wagtail-development/SKILL.md) guides
+- [`ai-humans-development`](.agents/skills/ai-humans-development/SKILL.md) guides
   ongoing application work and owns the shared development, Git, and pull-request
-  rules. Invoke it with `$wagtail-development`; [AGENTS.md](AGENTS.md) also directs
+  rules. Invoke it with `$ai-humans-development`; [AGENTS.md](AGENTS.md) also directs
   agents to use it for application development and review.
-- [`wagtail-bootstrap`](.agents/skills/wagtail-bootstrap/SKILL.md) includes its
-  own templates for creating another site. Invoke it with `$wagtail-bootstrap`
+- [`ai-humans-bootstrap`](.agents/skills/ai-humans-bootstrap/SKILL.md) includes its
+  own templates for creating another site. Invoke it with `$ai-humans-bootstrap`
   and supply the new project directory and site name.
 
-Five imported skills provide technical guidance alongside `wagtail-development`:
+Five imported skills provide technical guidance alongside `ai-humans-development`:
 
 | Skill | Use for |
 | --- | --- |
@@ -39,14 +39,14 @@ in this application, with no dependency on a sibling checkout.
 Work on this project spans two sibling repositories:
 
 - `wagtail-ai-humans/`: the Wagtail application and its repository skills.
-- `../wagtail-ai-humans-base/`: the reusable copies of `wagtail-development`,
-  `wagtail-bootstrap`, and bootstrap resources.
+- `../wagtail-ai-humans-base/`: the reusable copies of `ai-humans-development`,
+  `ai-humans-bootstrap`, and bootstrap resources.
 
 When updating either workflow skill, copy the complete update to the matching
 directory in `wagtail-ai-humans-base`, including templates, references, UI
-metadata, and resource additions or removals. When changing `wagtail-development`,
+metadata, and resource additions or removals. When changing `ai-humans-development`,
 also update its bundled copy at
-`.agents/skills/wagtail-bootstrap/assets/templates/.agents/skills/wagtail-development/`
+`.agents/skills/ai-humans-bootstrap/assets/templates/.agents/skills/ai-humans-development/`
 before mirroring the bootstrap skill. Preserve unrelated application changes and
 independent edits in either repository.
 

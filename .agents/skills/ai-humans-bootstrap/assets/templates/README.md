@@ -7,9 +7,9 @@ in `pyproject.toml` and `uv.lock`.
 ## Development workflow
 
 [AGENTS.md](AGENTS.md) directs application work to the repository-local
-[`wagtail-development` skill](.agents/skills/wagtail-development/SKILL.md).
+[`ai-humans-development` skill](.agents/skills/ai-humans-development/SKILL.md).
 The skill owns the shared development, Git, and pull-request rules. Invoke it
-explicitly with `$wagtail-development`. Both the instructions and skill are
+explicitly with `$ai-humans-development`. Both the instructions and skill are
 included in this project; no source checkout or user-level installation is needed.
 They can evolve with this site's own requirements.
 

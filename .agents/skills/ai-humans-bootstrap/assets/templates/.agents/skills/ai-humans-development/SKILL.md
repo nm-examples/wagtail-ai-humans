@@ -1,9 +1,9 @@
 ---
-name: wagtail-development
+name: ai-humans-development
 description: Plan, implement, fix, and review changes to this Wagtail application using focused increments, behaviour-based verification, and clear review evidence. Use for ongoing application development, not bootstrapping a separate site.
 ---
 
-# Wagtail development
+# AI Humans Development
 
 Use the repository's `AGENTS.md`, README, existing code, and configured tools to
 ground decisions. Keep the depth of this workflow proportional to the change:

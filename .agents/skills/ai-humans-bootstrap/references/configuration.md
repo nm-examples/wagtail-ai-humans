@@ -117,7 +117,7 @@ preserved and that the home page no longer depends on the removed include.
 ## Validate the generated project
 
 Check that `AGENTS.md` links to the included
-`.agents/skills/wagtail-development/SKILL.md`, that the skill includes its
+`.agents/skills/ai-humans-development/SKILL.md`, that the skill includes its
 `agents/openai.yaml`, and that the README links resolve locally. The generated
 guidance must not reference source repository paths or sibling mirroring. Validate
 the included development skill with the skill validator when available.

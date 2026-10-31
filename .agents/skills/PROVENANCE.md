@@ -31,10 +31,10 @@ Choose and review an exact source commit. Compare its complete skill directories
 with these copies, then copy the reviewed updates and preserve the supplied
 licence material. Record the new commit here and describe any intentional local
 differences. Validate the affected skills, check documentation links, and inspect
-the complete diff before user review under `wagtail-development`.
+the complete diff before user review under `ai-humans-development`.
 
 Keep project-specific workflow and tool instructions in the project's
-`AGENTS.md` and `wagtail-development` skill so the imported content stays easy
+`AGENTS.md` and `ai-humans-development` skill so the imported content stays easy
 to compare with its source. The imported skills supplement that workflow.
 
 These copies belong to this application only. They are not mirrored into
