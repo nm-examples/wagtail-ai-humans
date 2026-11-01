@@ -11,6 +11,12 @@ in `pyproject.toml` and `uv.lock`.
 The skill owns the shared development, Git, and pull-request rules. Invoke it
 explicitly with `$ai-humans-development`.
 
+For a requested code review or an agreed review step,
+[`ai-humans-code-review`](.agents/skills/ai-humans-code-review/SKILL.md) supplements
+that workflow with review priorities, evidence, and findings ordered by severity.
+Invoke it explicitly with `$ai-humans-code-review` to review current changes or
+a specified area of the project.
+
 Five local technical skills supplement that workflow:
 
 | Skill | Use for |
@@ -23,7 +29,7 @@ Five local technical skills supplement that workflow:
 
 Use only the technical skills relevant to a task, following the configured
 Docker, uv, and `just` workflow. References to linting or frontend builds apply
-when those tools are configured. All six skills are included in this project;
+when those tools are configured. All seven skills are included in this project;
 no source checkout or user-level installation is needed. They can evolve with
 this site's own requirements. The imported skills' source commit, licence
 material, and update guidance are recorded in

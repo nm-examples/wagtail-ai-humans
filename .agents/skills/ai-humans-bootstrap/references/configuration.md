@@ -116,12 +116,13 @@ preserved and that the home page no longer depends on the removed include.
 
 ## Validate the generated project
 
-Check that `AGENTS.md` and the README link to all six included skills:
-`ai-humans-development`, `wagtail-content-modeling`, `wagtail-backend`,
-`wagtail-frontend`, `wagtail-api`, and `wagtail-upgrade`. Confirm that the development
-skill includes its `agents/openai.yaml` and that the imported skills' provenance
-and licence material are included. Validate all six skills with the skill
-validator when available and check that local documentation links resolve.
+Check that `AGENTS.md` and the README link to all seven included skills:
+`ai-humans-development`, `ai-humans-code-review`, `wagtail-content-modeling`,
+`wagtail-backend`, `wagtail-frontend`, `wagtail-api`, and `wagtail-upgrade`.
+Confirm that the development and code review skills include their
+`agents/openai.yaml` and that the imported skills' provenance and licence material
+are included. Validate all seven skills with the skill validator when available
+and check that local documentation links resolve.
 The generated guidance and provenance must not require source repository paths
 or sibling mirroring. Retain source attribution links for the imported skills.
 

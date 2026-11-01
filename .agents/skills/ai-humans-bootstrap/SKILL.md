@@ -39,9 +39,9 @@ an external reference checkout.
    constraints in `pyproject.toml` before removing `requirements.txt`.
 4. Render and copy [the bundled templates](assets/templates/) into the new
    project, including dotfiles, production settings, `AGENTS.md`, and the complete
-   bundled `.agents/skills/` tree. This includes `ai-humans-development` with its UI
-   metadata, the five Wagtail technical skills, and their provenance and licence
-   material. Replace these tokens:
+   bundled `.agents/skills/` tree. This includes `ai-humans-development` and
+   `ai-humans-code-review` with their UI metadata, the five Wagtail technical
+   skills, and their provenance and licence material. Replace these tokens:
 
    | Token | Value |
    | --- | --- |
@@ -55,7 +55,7 @@ an external reference checkout.
    Do not copy this repository's `pyproject.toml`, lockfile, generated secret
    key, database, uploads, Git history, root `AGENTS.md`, or bootstrap skill folder
    into the new site. Use the bundled project `AGENTS.md`, which has no dependency
-   on the source repositories or their mirroring requirements. The six bundled
+   on the source repositories or their mirroring requirements. The seven bundled
    skills are deliberately included; do not copy unrelated installed skills.
 5. Follow [Django settings and validation](references/configuration.md) to adapt
    the newly generated base and development settings and centralize public-site

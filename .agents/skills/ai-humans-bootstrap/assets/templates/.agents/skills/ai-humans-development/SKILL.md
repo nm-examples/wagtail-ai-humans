@@ -14,6 +14,10 @@ expand scope, or introduce a different architecture or toolchain. Explain any
 conflict and follow the user's instructions and applicable instruction hierarchy.
 This guidance does not replace automated checks or developer review.
 
+For a requested code review or an agreed review step, also follow
+[ai-humans-code-review](../ai-humans-code-review/SKILL.md) for review priorities,
+evidence, and findings. Routine implementation checks remain part of this workflow.
+
 ## Assess scope and reviewability
 
 Before editing, identify the intended outcome, affected areas, and significant

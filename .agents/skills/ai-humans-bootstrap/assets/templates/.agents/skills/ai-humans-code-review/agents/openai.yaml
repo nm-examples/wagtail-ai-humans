@@ -1,0 +1,3 @@
+interface:
+  display_name: "AI Humans Code Review"
+  short_description: "Review Wagtail changes with evidence and clear priorities"

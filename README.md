@@ -4,12 +4,16 @@ Wagtail CMS with Python 3.14, PostgreSQL 18, and dependencies managed by uv. Doc
 the main local development workflow. Docker's default build target is a separate
 production image.
 
-This repository includes seven local skills. Two define the project workflow:
+This repository includes eight local skills. Three support the project workflow:
 
 - [`ai-humans-development`](.agents/skills/ai-humans-development/SKILL.md) guides
   ongoing application work and owns the shared development, Git, and pull-request
   rules. Invoke it with `$ai-humans-development`; [AGENTS.md](AGENTS.md) also directs
   agents to use it for application development and review.
+- [`ai-humans-code-review`](.agents/skills/ai-humans-code-review/SKILL.md) reviews
+  current changes or a requested area for actionable findings, using evidence and
+  consistent severity. Invoke it with `$ai-humans-code-review`; it supplements the
+  development workflow and loads relevant technical guidance.
 - [`ai-humans-bootstrap`](.agents/skills/ai-humans-bootstrap/SKILL.md) includes its
   own templates for creating another site. Invoke it with `$ai-humans-bootstrap`
   and supply the new project directory and site name.
@@ -40,23 +44,24 @@ without a sibling checkout.
 Work on this project spans two sibling repositories:
 
 - `wagtail-ai-humans/`: the Wagtail application and its repository skills.
-- `../wagtail-ai-humans-base/`: the reusable copies of all seven skills and
+- `../wagtail-ai-humans-base/`: the reusable copies of all eight skills and
   bootstrap resources.
 
 When updating a skill, copy the complete update to the matching directory in
 `wagtail-ai-humans-base`, including templates, references, UI metadata, and resource
-additions or removals. For `ai-humans-development` and the five imported technical
-skills, also update their bundled directories under
+additions or removals. For `ai-humans-development`, `ai-humans-code-review`, and
+the five imported technical skills, also update their bundled directories under
 `.agents/skills/ai-humans-bootstrap/assets/templates/.agents/skills/`
 before mirroring the bootstrap skill. Keep the imported skills' provenance and
 licence material current in both repositories and their templates. Preserve
 unrelated application changes and independent edits in either repository.
 
 Both repositories have their own `AGENTS.md` appropriate to their role. Bootstrap
-templates include project instructions, `ai-humans-development`, and the five
-technical skills with their provenance and licence material. New sites carry
-these six skills independently. Generated sites do not inherit the source
-repositories' sibling-mirroring requirements or the bootstrap skill itself.
+templates include project instructions, `ai-humans-development`,
+`ai-humans-code-review`, and the five technical skills with their provenance and
+licence material. New sites carry these seven skills independently. Generated
+sites do not inherit the source repositories' sibling-mirroring requirements or
+the bootstrap skill itself.
 
 ## Local development
 
