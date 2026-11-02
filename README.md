@@ -111,28 +111,66 @@ just migrate
 just check
 just test
 just test home --keepdb
+just lint                       # Check Python errors and import order
+just format-check               # Check Python formatting without changes
+just format                     # Sort imports and format Python files
+just shell                      # Open a shell in the running web container
 just manage shell
 just manage shell -c 'print("hello from Django")'
 just dbshell
 
 # Add dependencies, update pyproject.toml and uv.lock, then rebuild and restart.
 just add django-debug-toolbar
-just add --dev ruff
 
 # Run Django commands without an already-running web container.
 just manage-once check
 ```
 
-`manage`, `migrate`, `superuser`, `check`, and `test` use the running web container.
+`shell`, `manage`, `migrate`, `superuser`, `check`, and `test` use the running web
+container.
 `manage-once` starts a temporary container and the database if needed. Arguments,
 including quoted Python code, are forwarded as supplied. The shortcuts explicitly
 select the development Compose file; production shortcuts begin with `prod-`.
 The underlying Docker Compose commands remain available if you need them.
 
+Use `just shell` for ad-hoc commands inside the running development web container.
+It opens `/bin/sh` as the application user in `/app`, with the container's Python
+environment on `PATH`. Type `exit` to return to your host terminal.
+`just manage shell` opens the Django Python shell instead.
+
 Alternatively, host-installed uv can update dependencies with `uv add`.
 Commit both `pyproject.toml` and `uv.lock`. Image builds use `uv sync --locked`,
 so an out-of-date lockfile fails the build. Run `just rebuild` after changing
 dependencies with host-installed uv.
+
+### Python formatting and linting
+
+[Ruff](https://docs.astral.sh/ruff/) provides Python formatting, linting, and
+import sorting. Its version is pinned in the `dev` dependency group and locked
+in `uv.lock`. It is installed in development images and excluded from production
+dependencies. After pulling these changes into an existing checkout, run
+`just build` to install it in the development image.
+
+Run `just lint` and `just format-check` before handing over Python changes.
+Both commands report problems without modifying files. Use `just format` to sort
+imports and apply formatting, then run both checks again. `just lint --fix`
+applies Ruff's available safe lint fixes; review the resulting diff.
+
+These commands use temporary development containers with the source directory
+mounted, so they do not require a running web server or database. Formatting and
+fixes update the files in your checkout. They supplement `just check` and the
+relevant `just test` commands.
+
+Configuration lives in `pyproject.toml`: Python 3.14, an 88-character formatting
+target, basic Python error checks (`E4`, `E7`, `E9`, `F`), and import sorting (`I`).
+The two environment settings modules allow their deliberate wildcard imports;
+production also allows references to names supplied by that import. Other checks
+still apply. Migrations retain Python error checks but are excluded
+from formatting and import sorting.
+The `.agents` directory is excluded because it contains imported skill utilities
+and unrendered bootstrap templates. Ruff also respects `.gitignore`, excluding
+local settings, uploaded media, collected static files, and virtual environments.
+HTML templates, CSS, JavaScript, and Markdown are outside Ruff's scope.
 
 ## Site assets
 

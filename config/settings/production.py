@@ -20,7 +20,12 @@ if not SECRET_KEY or not ALLOWED_HOSTS:
 
 if any(
     not os.environ.get(variable)
-    for variable in ("POSTGRES_DB", "POSTGRES_USER", "POSTGRES_PASSWORD", "POSTGRES_HOST")
+    for variable in (
+        "POSTGRES_DB",
+        "POSTGRES_USER",
+        "POSTGRES_PASSWORD",
+        "POSTGRES_HOST",
+    )
 ):
     raise ImproperlyConfigured(
         "Production requires POSTGRES_DB, POSTGRES_USER, POSTGRES_PASSWORD, "
