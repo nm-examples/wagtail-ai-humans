@@ -53,6 +53,14 @@ the base repository does not require a running application.
 | Tests and verification | Check whether coverage demonstrates the requested outcome and would detect the relevant regression, including permission or invalid cases when affected. Identify specific missing scenarios; a low coverage number or absent test alone is not a finding. |
 | Documentation and operation | Check affected feature, editor, setup, configuration, and deployment instructions for missing or misleading information. Include migration, dependency/lockfile, and asset workflow changes when relevant. Scale documentation needs to the change. |
 
+Review test selection using the development skill's verification guidance.
+Assess both missing coverage and whether each added test protects a meaningful
+project requirement or integration boundary, adds distinct confidence, and has
+a proportionate maintenance cost. Flag redundant framework-mechanics tests or
+incidental assertions when they add concrete maintenance burden. Preserve useful
+integration coverage even when the framework supplies the underlying behaviour;
+passing tests alone do not justify their scope.
+
 ## Gather evidence
 
 Verify suspected findings against the actual control flow and the project's

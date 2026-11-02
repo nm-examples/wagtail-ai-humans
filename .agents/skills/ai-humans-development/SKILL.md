@@ -51,6 +51,28 @@ expected text, destinations, or visibility; a successful HTTP response alone doe
 not establish that the right content appeared. For editor-facing features,
 consider validation, preview, and publishing where affected.
 
+Before adding a test, identify the meaningful regression it would detect and the
+confidence it adds beyond existing coverage. Cover project-owned rules and
+important configuration or integration boundaries. For example, saving a
+configured snippet through the admin can verify that its registration and fields
+work together. Choose the smallest set of tests that provides useful confidence.
+
+Rely on upstream coverage for unmodified framework mechanics. Add focused
+coverage when customising those mechanics, integrating them in a significant
+way, or reproducing a demonstrated failure. Avoid redundant scenarios and
+assertions tied to incidental framework details; a default login redirect or
+delete-confirmation flow does not automatically need another project test.
+
+Use test-driven development (TDD) by default for application behaviour that
+warrants automated tests: write a behaviour test, observe it fail for the expected
+missing behaviour or bug, implement enough to pass, then refactor with tests
+passing. An unrelated setup failure does not establish the intended failing case.
+For refactoring, establish relevant behaviour coverage before changing code.
+State the verification approach before implementation and explain an exception
+when another approach fits the task better, such as documentation checks, visual
+inspection, generated-migration checks, or an exploratory investigation. Choose
+valuable tests before applying TDD; do not add tests merely to follow its sequence.
+
 For existing code with weak coverage, add a focused test of the relevant existing
 behaviour when it helps make the change safe. Distinguish intended behaviour from
 a suspected existing bug. Prefer observable results over assertions tied to the
