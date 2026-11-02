@@ -30,13 +30,19 @@ Reassess if implementation reveals unexpected complexity.
 
 Split by usable behaviour. Keep the models, migrations, templates, and tests
 needed to understand one behaviour together. For example, an editable article
-page can precede its listing, categories, and related articles. Do not use a
-rigid line count as a substitute for judging complexity.
+page with preview and publication can precede its listing and filters, followed
+by API access. Order increments so each builds on earlier work and can be
+understood, run, and verified at its own commit boundary. Do not complete the
+whole feature first and rely on splitting it into commits afterwards. A small,
+coherent change can remain one increment; do not use a rigid line count or a
+fixed number of commits as a substitute for judging complexity.
 
-Splitting work does not cancel the remaining requested scope. Complete authorised
-increments in order when the direction is clear. Ask for clarification when an
-unresolved product or architectural decision materially changes the outcome;
-routine implementation choices do not require another approval.
+Keep a short record of the agreed increments, completed work, and remaining
+scope so review pauses do not lose the rest of the task. Work in the agreed
+order and use the review checkpoints in the Git workflow below. Ask for
+clarification when an unresolved product or architectural decision materially
+changes the outcome; resolve routine implementation choices within the agreed
+scope.
 
 ## Establish meaningful verification
 
@@ -135,10 +141,11 @@ or changing configuration to obtain a passing result. Explain necessary changes 
 those requirements or expected behaviour. If a check cannot run, state the command,
 reason, and resulting gap; do not claim it passed.
 
-Inspect the complete diff before finishing. Remove accidental files, debugging
-code, and unrelated edits introduced by this work. Give a reviewer the concrete
-problem, resulting behaviour, significant decisions, checks and results, and any
-remaining limitations. Include practical steps to try the feature when useful.
+Inspect the current increment's complete diff before handing it over. Remove
+accidental files, debugging code, and unrelated edits introduced by this work.
+Give a reviewer the concrete problem, resulting behaviour, significant decisions,
+checks and results, and any remaining limitations. Include practical steps to
+try the feature when useful.
 Keep the handoff understandable without the chat history, and distinguish
 completed work from proposed follow-up increments.
 
@@ -156,21 +163,36 @@ commit-size limits are configured.
    alongside the branch name. No fixed prefix is required; category prefixes such
    as `feat/`, `bugfix/`, and `docs/` are suitable. Preserve existing uncommitted
    work and keep unrelated changes out of the new branch's commits.
-2. **Define commit boundaries before substantial work.** Describe the intended
-   commits briefly as part of the scope assessment. Each commit should explain
-   one coherent change, including its relevant tests, migrations, and documentation.
+2. **Plan an ordered series of reviewable commits.** Describe the intended
+   commits briefly before substantial work, including dependencies and the usable
+   outcome of each. Keep each behaviour's relevant implementation, tests,
+   migrations, and documentation together. Make the sequence easy for a developer
+   to review and check out one step at a time; avoid one whole-feature commit when
+   the work has distinct, usable increments. Keep inseparable changes together.
    A small correction can be a single commit without a separate written plan.
-3. **Prepare verified increments for user review before committing.** Complete
-   implementation and relevant checks, then leave changes unstaged and uncommitted.
-   Present what changed, verification results, limitations, and how to review the
-   result. Commit only after the user explicitly authorises committing the reviewed
-   changes. A request to implement a change does not authorise a commit. Automated
-   checks and the agent's own diff inspection do not replace user review.
-   Verification is proportional to the change, as described above. Do not commit
-   unfinished work or a change with unresolved relevant failures; explain any
-   verification gap and leave the affected work uncommitted when the gap prevents
-   establishing that the increment is ready. Continue later authorised implementation
-   increments while leaving them uncommitted for review.
+3. **Stop for developer review at each increment.** Complete the current
+   increment and its relevant checks, then leave its changes unstaged and
+   uncommitted. Give a concise handoff in the chat that states what is done so
+   far, what this increment makes usable, the files or entry points to review,
+   checks and results, limitations, practical steps to try it, and what remains.
+   Name the proposed commit and the next increment, if any, so the developer
+   knows exactly what can be reviewed now and what continuing would involve.
+
+   Ask the developer to review the increment and authorise committing it and,
+   if work remains, continuing. End the turn and wait before committing or
+   starting later implementation increments. Commit approval covers the reviewed increment;
+   it does not by itself authorise continuing. The developer can authorise both
+   actions together, for example with "commit and continue"; do not request that
+   same approval again. A request to implement the overall feature does not
+   waive these checkpoints or authorise commits. If the developer explicitly
+   requests uninterrupted implementation or batch review, follow that preference
+   while preserving coherent commit boundaries and the authorisation required
+   for commits and remote actions.
+
+   Automated checks and the agent's own diff inspection do not replace developer
+   review. Verification remains proportional to the change. Do not commit
+   unfinished work or unresolved relevant failures; explain any verification gap
+   and leave the increment uncommitted when it cannot be established as ready.
 4. **Review the staged diff before every commit.** After the user authorises a
    commit, inspect Git status and distinguish existing user changes from this
    task's changes. Stage only the intended files or hunks, inspect the complete
@@ -186,8 +208,10 @@ commit-size limits are configured.
    refactoring. Keep inseparable changes together and explain an unusually broad
    commit when its coherence is not obvious. Do not split simply to meet a count.
 6. **Report commits and remaining work.** Verify Git status after committing and
-   report each repository's commit IDs, completed outcomes, and remaining work or
-   uncommitted changes. Distinguish pre-existing user changes from unfinished work.
+   report each repository's commit IDs, the increment's completed outcome, and
+   remaining work or uncommitted changes. State the next increment and whether
+   continuing is authorised or awaiting the developer's decision. Distinguish
+   pre-existing user changes from unfinished work.
 
 Keep commits local unless the user explicitly approves a push as described below.
 Merging requires an explicit user request. Do not rewrite existing commits or
