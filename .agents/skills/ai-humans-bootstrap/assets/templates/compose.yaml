@@ -4,7 +4,7 @@ services:
       context: .
       target: development
     ports:
-      - "127.0.0.1:__HTTP_PORT__:8000"
+      - "127.0.0.1:8000:8000"
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.dev
       POSTGRES_DB: wagtail

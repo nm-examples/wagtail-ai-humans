@@ -44,7 +44,7 @@ just setup
 just superuser
 ```
 
-Open http://localhost:__HTTP_PORT__/ and http://localhost:__HTTP_PORT__/admin/.
+Open http://localhost:8000/ and http://localhost:8000/admin/.
 `just setup` builds the development image, starts PostgreSQL, applies migrations,
 and starts the web service in the background. Python changes reload automatically.
 
@@ -176,7 +176,7 @@ Keep secret values single-quoted in the environment file so Compose preserves
 dollar signs. Database environment variables initialize a new data volume;
 changing a password later also requires updating the existing PostgreSQL role.
 
-Production and development use host port __HTTP_PORT__ in their separate Compose
+Production and development use host port 8000 in their separate Compose
 examples. Stop development before testing production on that same port. These
 commands use the Docker host selected by your current Docker context.
 

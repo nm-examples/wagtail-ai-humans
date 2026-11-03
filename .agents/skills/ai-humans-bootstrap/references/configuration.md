@@ -4,6 +4,19 @@ Read this when applying the skill's templates to a newly generated Wagtail site.
 Paths below are relative to that new project. Adapt to the generated template
 and installed versions; do not assume line numbers or replace unrelated settings.
 
+## Port 8000 preflight
+
+Use the Docker context that will run the site. Run
+`docker ps --format '{{.Names}}\t{{.Ports}}'` and check the published host
+ports for TCP 8000. For a local Docker host, also check for a local listener
+on TCP 8000, for example with `lsof -nP -iTCP:8000 -sTCP:LISTEN`.
+
+If another container publishes host port 8000, identify it and ask the developer
+to stop it. If another process holds the port, ask the developer to free it.
+Wait and verify that the port is available before continuing. Apply the same
+rule if Compose reports a port conflict at startup. Leave existing services for
+the developer to manage and keep the generated port fixed at 8000.
+
 ## Base and development settings
 
 In `config/settings/base.py`, import `os` and replace the SQLite database setting:
@@ -30,7 +43,7 @@ a properly escaped Python string literal.
 In `config/settings/dev.py`, preserve its generated development secret key,
 `DEBUG=True`, and console email backend. Set `ALLOWED_HOSTS` to
 `["localhost", "127.0.0.1", "[::1]", "web"]`. Set `WAGTAILADMIN_BASE_URL` to
-`http://localhost:<chosen-host-port>`.
+`http://localhost:8000`.
 
 The production settings template requires explicit credentials, uses
 `config.settings.production` with `DEBUG=False`, and inserts WhiteNoise directly
@@ -126,8 +139,8 @@ preserved and that the home page no longer depends on the removed include.
   Adjust the template if explicitly selecting an older supported major.
 - Migrations are explicit. Never delete a volume or existing database to make a
   bootstrap check pass. Never transfer data from the source repository.
-- Only host HTTP port bindings and development URLs use the chosen host port;
-  Django and Gunicorn listen on port 8000 inside the container.
+- Both Compose stacks publish host port 8000. Django and Gunicorn also listen
+  on port 8000 inside the container.
 - The Justfile keeps local commands on `compose.yaml`, and `prod-` commands use
   the production file and `.env.production`. Keep positional argument forwarding.
 - Secret files, local settings, uploaded data, and caches stay out of Git and
@@ -182,10 +195,11 @@ PostgreSQL data survives recreation of its container using the new stack's own
 volume. Leave the user's other projects and services running.
 
 Validate production Compose using a temporary, isolated environment and project
-when possible. Test authentication, migrations, Gunicorn/static serving, and
-persistent storage; use a free host port. Clean up only resources created for
-that test. The production environment example intentionally has blank secrets:
-never replace it with test values or require real production secrets to test.
+when possible. Stop the new development stack's web service first so the
+production test can use port 8000. Test authentication, migrations, Gunicorn/static
+serving, and persistent storage. Clean up only resources created for that test
+and restart the new development web service. Put test values in a temporary
+environment file and keep the production example's secrets blank.
 
 If Docker is unavailable, perform dependency, settings, formatting, and static
 Compose checks where possible and report the runtime validation gap explicitly.
