@@ -116,10 +116,15 @@ to remove ordinary template syntax. Check rendered output when markup or styling
 changes; automated checks alone do not establish visual or accessibility quality.
 
 Use configured tools rather than installing a personal preferred stack. Type
-checkers, Ruff, Tailwind, TypeScript, and CI are not established requirements until
+checkers, Tailwind, TypeScript, and CI are not established requirements until
 the repository actually adopts them. Treat adopting tooling as an explicit,
 reviewable change, and keep `pyproject.toml` and `uv.lock` consistent when changing
 Python dependencies.
+
+For Python changes, run `just lint` and `just format-check` where those recipes
+are configured. Use `just format` to sort imports and format code, and inspect
+automatic fixes before handing over the change. Respect the Ruff configuration,
+including the exclusion of migrations from formatting and import sorting.
 
 ## Verify and prepare the change for review
 

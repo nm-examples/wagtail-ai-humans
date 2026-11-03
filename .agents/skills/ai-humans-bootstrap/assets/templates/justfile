@@ -41,6 +41,10 @@ rebuild:
 manage +args:
     {{ compose }} exec web python manage.py "$@"
 
+# Open a shell in the running development web container.
+shell:
+    {{ compose }} exec web /bin/sh
+
 # Run a Django command in a temporary container, starting the database if needed.
 manage-once +args:
     {{ compose }} run --rm web python manage.py "$@"
@@ -60,6 +64,19 @@ check *args:
 # Run Django tests; accepts test labels and options.
 test *args:
     {{ compose }} exec web python manage.py test "$@"
+
+# Check Python errors and import order without starting the web server or database.
+lint *args:
+    {{ compose }} run --rm --no-deps web ruff check . "$@"
+
+# Check Python formatting without changing files.
+format-check:
+    {{ compose }} run --rm --no-deps web ruff format --check .
+
+# Sort Python imports and apply consistent formatting.
+format:
+    {{ compose }} run --rm --no-deps web ruff check --select I --fix .
+    {{ compose }} run --rm --no-deps web ruff format .
 
 # Add Python dependencies (optionally --dev), then rebuild and restart locally.
 add +args:

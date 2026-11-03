@@ -37,6 +37,25 @@ The production settings template requires explicit credentials, uses
 after SecurityMiddleware. Keep static collection at build time; the build-only
 placeholder values must not become runtime environment defaults.
 
+## Python formatting and linting
+
+Merge [the Ruff configuration fragment](../assets/ruff-pyproject.toml) into the
+generated `pyproject.toml`, preserving its project metadata, dependencies, and any
+other existing configuration. Render `__RUFF_TARGET_VERSION__` as `py` followed by
+the selected Python minor version without the dot, such as `py314`. The fragment
+is input for this merge; do not copy it as a separate file into the new site.
+Keep Ruff in the `dev` dependency group and retain the fresh lockfile.
+
+Use the bundled configuration without broadening its suppressions. It keeps
+Python error checks and import sorting, allows the intended settings wildcard
+imports, and excludes migrations from formatting and import sorting while
+retaining their Python error checks. Preserve the production settings template's
+`from .base import *`.
+
+Use the validation commands below to clean up the generated scaffold. Inspect the
+changes and confirm migration files remain unchanged. Investigate scaffold errors
+that Ruff cannot fix safely.
+
 ## Public-site assets
 
 Centralize the fresh scaffold's project-owned CSS, JavaScript, and design images
@@ -98,7 +117,7 @@ preserved and that the home page no longer depends on the removed include.
 - The host virtual environment is ignored. The Linux environment stays at
   `/opt/venv`, outside the source mount at `/app`.
 - The production target is the Dockerfile's default target. It contains locked
-  runtime dependencies, no uv or compiler tools, and runs as a non-root user.
+  runtime dependencies, no Ruff, uv, or compiler tools, and runs as a non-root user.
 - Development and production Compose files are standalone. Production has no
   source bind mount and uses its own project name and volumes.
 - PostgreSQL has a health check and web waits for readiness. The database port
@@ -134,6 +153,10 @@ directory basename would reuse another site's resources, set a distinct name in
 just --fmt --check
 docker compose config --quiet
 just setup
+just lint --fix
+just format
+just lint
+just format-check
 just check
 just manage update_index
 just test home --noinput
@@ -141,6 +164,10 @@ just manage shell -c 'print("quoted arguments work")'
 just status
 docker build --target production -t <site-slug>:production .
 ```
+
+Try `just shell` and confirm it opens in `/app` as the application user, with
+Python from `/opt/venv` available; exit back to the host terminal. In the
+production image, confirm both the Ruff package and executable are absent.
 
 Verify the actual selected database backend and connectivity, not only that
 settings load. Confirm the home page, admin login, search, and static assets

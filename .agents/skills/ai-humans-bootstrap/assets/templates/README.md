@@ -59,6 +59,10 @@ just manage makemigrations
 just migrate
 just check
 just test home --noinput
+just lint                  # Check Python errors and import order
+just format-check          # Check Python formatting without changes
+just format                # Sort imports and format Python files
+just shell                 # Open a shell in the running web container
 just manage update_index
 just manage shell
 just dbshell
@@ -71,12 +75,45 @@ the lockfile, then rebuilds/restarts locally. Commit both dependency files.
 `just manage shell -c 'print("quoted arguments work")'` illustrates passing
 quoted arguments. Most Django shortcuts use the running web container.
 
+Use `just shell` for ad-hoc commands inside the running development web container.
+It opens `/bin/sh` as the application user in `/app`, with the container's Python
+environment on `PATH`. Type `exit` to return to your host terminal.
+`just manage shell` opens the Django Python shell instead.
+
 Development uses database/user `wagtail` and password `wagtail-dev-password`.
 The database is private to the Compose network at `db:5432`; it has no host port.
 Its data is kept in a named volume. Uploaded media stays in the source directory
 at `media/`. The container environment is `/opt/venv`, separate from the host's
 ignored `.venv`. `just down` retains volumes; Docker's `down --volumes` deletes
 them. This project uses PostgreSQL, with no SQLite fallback.
+
+### Python formatting and linting
+
+[Ruff](https://docs.astral.sh/ruff/) provides Python formatting, linting, and
+import sorting. Its version is pinned in the `dev` dependency group and locked
+in `uv.lock`. It is installed in development images and excluded from production
+dependencies. `just setup` builds the development image with Ruff installed;
+after changing dependencies, use `just rebuild`.
+
+Run `just lint` and `just format-check` before handing over Python changes.
+Both commands report problems without modifying files. Use `just format` to sort
+imports and apply formatting, then run both checks again. `just lint --fix`
+applies Ruff's available safe lint fixes; review the resulting diff.
+
+These commands use temporary development containers with the source directory
+mounted, so they do not require a running web server or database. Formatting and
+fixes update the files in your checkout. They supplement `just check` and the
+relevant `just test` commands.
+
+Configuration lives in `pyproject.toml`: Python __PYTHON_VERSION__, an 88-character
+formatting target, basic Python error checks (`E4`, `E7`, `E9`, `F`), and import
+sorting (`I`). The two environment settings modules allow their deliberate
+wildcard imports; production also allows references to names supplied by that
+import. Other checks still apply. Migrations retain Python error checks but are
+excluded from formatting and import sorting. The `.agents` directory and paths
+ignored by Git, such as local settings, uploaded media, collected static files,
+and virtual environments, are excluded. HTML templates, CSS, JavaScript, and
+Markdown are outside Ruff's scope.
 
 ## Site assets
 
