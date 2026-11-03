@@ -126,6 +126,26 @@ are configured. Use `just format` to sort imports and format code, and inspect
 automatic fixes before handing over the change. Respect the Ruff configuration,
 including the exclusion of migrations from formatting and import sorting.
 
+## Document feature changes
+
+Write for developers who are new to the project and will maintain or extend the
+feature. When an increment adds or changes behaviour, update the affected
+documentation in the same increment. Look for an existing guide first.
+
+- Keep project-wide setup, commands, and links to guides in the root `README.md`.
+- Put feature guides in `docs/`. Link each guide from the README or an existing
+  documentation index, with link text that helps developers find the feature
+  or task they need.
+- Keep delivery plans and acceptance criteria in `docs/plans/`.
+
+Adapt the [developer feature guide template](assets/developer-feature-guide.md)
+to identify the app or feature it covers, explain any editor workflow that
+drives the feature, and record its production configuration requirements and
+local development adjustments. Show developers where to start in the code and
+how to verify a change locally. Link to shared setup and related guides where
+they help the developer complete the task. Check file links, configuration names,
+commands, and expected results against the delivered feature.
+
 ## Verify and prepare the change for review
 
 Use the development commands in the README and `justfile`. For application
